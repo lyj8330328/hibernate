@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="hibernate.pojo">
+    <class name="Product" table="product">
+        <id name="id" column="id">
+            <generator class="native">
+            </generator>
+        </id>
+        <!--version元素必须紧挨着id后面  -->
+        <version name="version" column="ver" type="int"></version>
+        <property name="name" />
+        <property name="price" />
+        <many-to-one name="category" class="Category" column="cid"></many-to-one>
+    	<set name="users" table="user_product" lazy="false" >
+    		<key column="pid"></key>
+    		<many-to-many column="uid" class="User"></many-to-many>
+    	</set>
+    </class>
+     
+</hibernate-mapping>
